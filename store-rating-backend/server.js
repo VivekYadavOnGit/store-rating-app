@@ -4,6 +4,7 @@ const express = require('express')
 const cors = require('cors')
 const pool = require('./src/config/db')
 
+const adminRoutes = require('./src/routes/admin.routes')
 const authRoutes = require('./src/routes/auth.routes')
 const { authenticate } = require('./src/middleware/auth.middleware')
 const { authorize } = require('./src/middleware/role.middleware')
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/auth', authRoutes)
+app.use('/api/admin', adminRoutes)
 
 app.get(
   '/api/test-admin',
