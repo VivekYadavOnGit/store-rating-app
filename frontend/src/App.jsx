@@ -1,29 +1,41 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 
 import ProtectedRoute from "./layouts/ProtectedRoute"
+import AdminLayout from "./layouts/AdminLayout"
+import Login from "./pages/auth/Login"
 
 const AdminDashboard = () => <div>Admin Dashboard</div>
+const Users = () => <div>Users Page</div>
+const Stores = () => <div>Stores Page</div>
+
 const OwnerDashboard = () => <div>Owner Dashboard</div>
 const StoreList = () => <div>User Store List</div>
-const Login = () => <div>Login Page</div>
 
 function App() {
   return (
     <Routes>
-      
+
+      {/* Default Redirect */}
       <Route path="/" element={<Navigate to="/login" replace />} />
 
+      {/* Public Route */}
       <Route path="/login" element={<Login />} />
 
+      {/* Admin Routes */}
       <Route
-        path="/admin/dashboard"
+        path="/admin"
         element={
           <ProtectedRoute role="ADMIN">
-            <AdminDashboard />
+            <AdminLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="users" element={<Users />} />
+        <Route path="stores" element={<Stores />} />
+      </Route>
 
+      {/* Owner Route */}
       <Route
         path="/owner/dashboard"
         element={
@@ -33,6 +45,7 @@ function App() {
         }
       />
 
+      {/* User Route */}
       <Route
         path="/stores"
         element={
@@ -41,6 +54,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+
     </Routes>
   )
 }
