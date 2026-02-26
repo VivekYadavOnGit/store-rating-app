@@ -1,4 +1,10 @@
 const { fetchDashboardStats } = require('../services/admin.service')
+const {
+  validateEmail,
+  validatePassword,
+  validateName,
+  validateAddress
+} = require('../utils/validators')
 
 exports.getDashboardStats = async (req, res) => {
   try {
@@ -49,6 +55,35 @@ exports.createUser = async (req, res) => {
 
     if (!name || !email || !password || !role) {
       return res.status(400).json({ message: "Required fields missing" })
+    }
+
+    // 🔹 Name validation
+    if (!validateName(name)) {
+      return res.status(400).json({
+        message: "Name must be between 20 and 60 characters"
+      })
+    }
+
+    // 🔹 Email validation
+    if (!validateEmail(email)) {
+      return res.status(400).json({
+        message: "Invalid email format"
+      })
+    }
+
+    // 🔹 Password validation
+    if (!validatePassword(password)) {
+      return res.status(400).json({
+        message:
+          "Password must be 8-16 characters, include at least one uppercase letter and one special character"
+      })
+    }
+
+    // 🔹 Address validation
+    if (!validateAddress(address)) {
+      return res.status(400).json({
+        message: "Address must not exceed 400 characters"
+      })
     }
 
     const user = await createUserService({

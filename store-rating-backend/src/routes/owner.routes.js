@@ -4,13 +4,13 @@ const router = express.Router()
 const { authenticate } = require('../middleware/auth.middleware')
 const { authorize } = require('../middleware/role.middleware')
 
-const { updatePassword } = require('../controllers/user.controller')
+const { getOwnerDashboard } = require('../controllers/owner.controller')
 
-router.put(
-  '/update-password',
+router.get(
+  '/dashboard',
   authenticate,
-  authorize('USER','OWNER'),
-  updatePassword
+  authorize('USER', 'OWNER'),
+  getOwnerDashboard
 )
 
 module.exports = router
