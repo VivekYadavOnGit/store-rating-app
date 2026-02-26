@@ -1,6 +1,11 @@
 import { useState } from "react"
 import { useAuth } from "../../context/AuthContext"
 
+import Card from "../../components/ui/Card"
+import Input from "../../components/ui/Input"
+import Button from "../../components/ui/Button"
+import Loader from "../../components/ui/Loader"
+
 const Login = () => {
   const { login } = useAuth()
 
@@ -25,9 +30,10 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
-        
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+
+      <Card className="w-full max-w-md">
+
+        <h2 className="text-2xl font-bold text-center mb-2 text-gray-800">
           Store Rating Platform
         </h2>
 
@@ -42,45 +48,33 @@ const Login = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+          />
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-lg transition duration-200 disabled:opacity-50"
-          >
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+          />
+
+          <Button type="submit" disabled={loading}>
             {loading ? "Signing in..." : "Login"}
-          </button>
+          </Button>
+
         </form>
 
-      </div>
+        {loading && <Loader />}
+
+      </Card>
+
     </div>
   )
 }

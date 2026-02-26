@@ -3,8 +3,9 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import ProtectedRoute from "./layouts/ProtectedRoute"
 import AdminLayout from "./layouts/AdminLayout"
 import Login from "./pages/auth/Login"
+import Dashboard from "./pages/admin/Dashboard"
 
-const AdminDashboard = () => <div>Admin Dashboard</div>
+
 const Users = () => <div>Users Page</div>
 const Stores = () => <div>Stores Page</div>
 
@@ -30,7 +31,8 @@ function App() {
           </ProtectedRoute>
         }
       >
-        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
         <Route path="users" element={<Users />} />
         <Route path="stores" element={<Stores />} />
       </Route>
