@@ -4,9 +4,9 @@ import ProtectedRoute from "./layouts/ProtectedRoute"
 import AdminLayout from "./layouts/AdminLayout"
 import Login from "./pages/auth/Login"
 import Dashboard from "./pages/admin/Dashboard"
+import Users from "./pages/admin/Users"
 
 
-const Users = () => <div>Users Page</div>
 const Stores = () => <div>Stores Page</div>
 
 const OwnerDashboard = () => <div>Owner Dashboard</div>
