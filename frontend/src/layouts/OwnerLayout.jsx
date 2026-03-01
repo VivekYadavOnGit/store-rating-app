@@ -2,10 +2,11 @@ import { Outlet, NavLink } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { useState } from "react"
 import ChangePasswordModal from "../pages/auth/ChangePasswordModal"
+import RatingLogo from "../assets/rating.svg"
 
 const OwnerLayout = () => {
   const { logout, user } = useAuth()
-  const [openModal, setOpenModal] = useState(false) 
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -14,9 +15,16 @@ const OwnerLayout = () => {
       <header className="bg-white shadow-sm border-b px-6 py-4 flex justify-between items-center">
 
         <div>
-          <h1 className="text-lg font-semibold text-indigo-600">
-            Store Owner Panel
-          </h1>
+          <div className="flex items-center gap-2">
+            <img
+              src={RatingLogo}
+              alt="RateHub Logo"
+              className="w-8 h-8"
+            />
+            <h1 className="text-xl font-bold text-indigo-600 tracking-wide">
+              RateHub
+            </h1>
+          </div>
           <p className="text-xs text-gray-500">
             Welcome, {user?.name}
           </p>
@@ -27,10 +35,9 @@ const OwnerLayout = () => {
           <NavLink
             to="/owner/dashboard"
             className={({ isActive }) =>
-              `text-sm font-medium ${
-                isActive
-                  ? "text-indigo-600"
-                  : "text-gray-600 hover:text-indigo-600"
+              `text-sm font-medium ${isActive
+                ? "text-indigo-600"
+                : "text-gray-600 hover:text-indigo-600"
               }`
             }
           >

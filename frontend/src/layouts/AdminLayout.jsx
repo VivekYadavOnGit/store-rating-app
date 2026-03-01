@@ -2,6 +2,7 @@ import { Outlet, NavLink } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { useState } from "react"
 import ChangePasswordModal from "../pages/auth/ChangePasswordModal"
+import RatingLogo from "../assets/rating.svg"
 
 const AdminLayout = () => {
   const { logout, user } = useAuth()
@@ -13,9 +14,16 @@ const AdminLayout = () => {
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-md hidden md:block">
         <div className="p-6 border-b">
-          <h2 className="text-xl font-bold text-indigo-600">
-            Admin Panel
-          </h2>
+        <div className="flex items-center gap-2">
+  <img
+    src={RatingLogo}
+    alt="RateHub Logo"
+    className="w-8 h-8"
+  />
+  <h1 className="text-xl font-bold text-indigo-600 tracking-wide">
+    RateHub
+  </h1>
+</div>
           <p className="text-xs text-gray-500 mt-1">
             Welcome, {user?.name}
           </p>
