@@ -1,16 +1,19 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 
 import ProtectedRoute from "./layouts/ProtectedRoute"
+
 import AdminLayout from "./layouts/AdminLayout"
+import OwnerLayout from "./layouts/OwnerLayout"
+import UserLayout from "./layouts/UserLayout"
+
 import Login from "./pages/auth/Login"
+
 import Dashboard from "./pages/admin/Dashboard"
 import Users from "./pages/admin/Users"
+import Stores from "./pages/admin/Stores"
 
-
-const Stores = () => <div>Stores Page</div>
-
-const OwnerDashboard = () => <div>Owner Dashboard</div>
-const StoreList = () => <div>User Store List</div>
+import OwnerDashboard from "./pages/owner/OwnerDashboard"
+import UserDashboard from "./pages/user/UserDashboard"
 
 function App() {
   return (
@@ -22,7 +25,7 @@ function App() {
       {/* Public Route */}
       <Route path="/login" element={<Login />} />
 
-      {/* Admin Routes */}
+      {/* ================= ADMIN ================= */}
       <Route
         path="/admin"
         element={
@@ -32,30 +35,36 @@ function App() {
         }
       >
         <Route path="dashboard" element={<Dashboard />} />
-        {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
         <Route path="users" element={<Users />} />
         <Route path="stores" element={<Stores />} />
       </Route>
 
-      {/* Owner Route */}
+      {/* ================= OWNER ================= */}
       <Route
-        path="/owner/dashboard"
+        path="/owner"
         element={
           <ProtectedRoute role="OWNER">
-            <OwnerDashboard />
+            <OwnerLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route path="dashboard" element={<OwnerDashboard />} />
+      </Route>
 
-      {/* User Route */}
+      {/* ================= USER ================= */}
       <Route
-        path="/stores"
+        path="/user"
         element={
           <ProtectedRoute role="USER">
-            <StoreList />
+            <UserLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route path="dashboard" element={<UserDashboard />} />
+      </Route>
+
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
 
     </Routes>
   )
