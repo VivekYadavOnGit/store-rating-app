@@ -19,6 +19,20 @@ export const AuthProvider = ({ children }) => {
     setLoading(false)
   }, [])
 
+  // 🔐 Register (Aligned with backend controller)
+  const register = async (formData) => {
+    try {
+      const res = await API.post("/auth/register", formData)
+      return res.data
+    } catch (error) {
+      console.log("FULL ERROR:", error)
+      console.log("ERROR RESPONSE:", error.response)
+      console.log("ERROR DATA:", error.response?.data)
+  
+      throw error.response?.data?.message || "Registration failed"
+    }
+  }
+
   // 🔐 Login
   const login = async (email, password) => {
     try {
@@ -31,13 +45,15 @@ export const AuthProvider = ({ children }) => {
 
       setUser(user)
 
-      // 🔁 Redirect based on role
+      // 🔁 Role-Based Redirect
       if (user.role === "ADMIN") {
         navigate("/admin/dashboard")
       } else if (user.role === "OWNER") {
         navigate("/owner/dashboard")
+      } else if (user.role === "USER") {
+        navigate("/user/dashboard")
       } else {
-        navigate("/stores")
+        navigate("/login")
       }
 
     } catch (error) {
@@ -54,11 +70,18 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        register,
+        login,
+        logout,
+        loading
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
 }
 
-// Custom Hook
 export const useAuth = () => useContext(AuthContext)

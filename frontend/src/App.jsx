@@ -6,7 +6,7 @@ import AdminLayout from "./layouts/AdminLayout"
 import OwnerLayout from "./layouts/OwnerLayout"
 import UserLayout from "./layouts/UserLayout"
 
-import Login from "./pages/auth/Login"
+import AuthPage from "./pages/auth/AuthPage"
 
 import Dashboard from "./pages/admin/Dashboard"
 import Users from "./pages/admin/Users"
@@ -23,7 +23,7 @@ function App() {
       <Route path="/" element={<Navigate to="/login" replace />} />
 
       {/* Public Route */}
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<AuthPage />} />
 
       {/* ================= ADMIN ================= */}
       <Route
