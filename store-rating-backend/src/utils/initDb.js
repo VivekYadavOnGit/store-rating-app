@@ -52,7 +52,7 @@ async function initDb() {
     );
   `)
 
-  console.log("Database initialized ✅")
+  console.log("Database initialized successfully")
 }
 
 module.exports = initDb

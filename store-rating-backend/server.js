@@ -10,21 +10,26 @@ const { authenticate } = require('./src/middleware/auth.middleware')
 const { authorize } = require('./src/middleware/role.middleware')
 const storeRoutes = require('./src/routes/store.routes')
 const seedAdmin = require('./src/utils/seedAdmin')
-const initDb = require('./src/utils/initDb') 
+const initDb = require('./src/utils/initDb')
 const userRoutes = require('./src/routes/user.routes')
 const ownerRoutes = require('./src/routes/owner.routes')
 
 const app = express()
 
-
-app.use(cors())
 app.use(express.json())
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://ratehub.vercel.app"
+  ],
+  credentials: true
+}))
 app.use('/api/stores', storeRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/owner', ownerRoutes)
 // Routes
 app.get('/', (req, res) => {
-  res.json({ message: "API is running 🚀" })
+  res.json({ message: "API is running successfully" })
 })
 
 app.use('/api/auth', authRoutes)
@@ -44,10 +49,9 @@ const PORT = process.env.PORT || 5000
 // Connect DB and start server ONLY ONCE
 async function startServer() {
   try {
-    await pool.connect()
-    console.log("PostgreSQL Connected ✅")
+    await pool.query('SELECT 1')
 
-    await initDb() 
+    await initDb()
     await seedAdmin()
 
     app.listen(PORT, () => {

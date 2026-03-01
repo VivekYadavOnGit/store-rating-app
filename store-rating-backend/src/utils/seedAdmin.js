@@ -22,9 +22,9 @@ async function seedAdmin() {
       ]
     )
 
-    console.log("Default admin created ✅")
+    console.log("Default admin created successfully")
   } else {
-    console.log("Admin already exists")
+    console.log("Admin Seeded successfully")
   }
 }
 
