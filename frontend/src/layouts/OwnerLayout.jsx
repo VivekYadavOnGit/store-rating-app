@@ -1,13 +1,11 @@
 import { Outlet, NavLink } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
-
 import { useState } from "react"
 import ChangePasswordModal from "../pages/auth/ChangePasswordModal"
 
-const [openModal, setOpenModal] = useState(false)
-
 const OwnerLayout = () => {
   const { logout, user } = useAuth()
+  const [openModal, setOpenModal] = useState(false) 
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -29,9 +27,10 @@ const OwnerLayout = () => {
           <NavLink
             to="/owner/dashboard"
             className={({ isActive }) =>
-              `text-sm font-medium ${isActive
-                ? "text-indigo-600"
-                : "text-gray-600 hover:text-indigo-600"
+              `text-sm font-medium ${
+                isActive
+                  ? "text-indigo-600"
+                  : "text-gray-600 hover:text-indigo-600"
               }`
             }
           >
@@ -53,21 +52,19 @@ const OwnerLayout = () => {
           </button>
 
         </div>
-
       </header>
 
-      {/* Content */}
       <main className="px-10 py-10 flex-1 bg-gray-100">
         <Outlet />
       </main>
-      <ChangePasswordModal
-  isOpen={openModal}
-  onClose={() => setOpenModal(false)}
-  onSuccess={() => {
-    logout()
-  }}
-/>
 
+      <ChangePasswordModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        onSuccess={() => {
+          logout()
+        }}
+      />
     </div>
   )
 }

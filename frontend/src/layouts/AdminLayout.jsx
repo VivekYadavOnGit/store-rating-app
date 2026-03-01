@@ -1,8 +1,11 @@
 import { Outlet, NavLink } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import { useState } from "react"
+import ChangePasswordModal from "../pages/auth/ChangePasswordModal"
 
 const AdminLayout = () => {
-  const { logout } = useAuth()
+  const { logout, user } = useAuth()
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <div className="min-h-screen flex bg-gray-100">
@@ -13,9 +16,13 @@ const AdminLayout = () => {
           <h2 className="text-xl font-bold text-indigo-600">
             Admin Panel
           </h2>
+          <p className="text-xs text-gray-500 mt-1">
+            Welcome, {user?.name}
+          </p>
         </div>
 
         <nav className="p-4 space-y-2">
+
           <NavLink
             to="/admin/dashboard"
             className={({ isActive }) =>
@@ -55,18 +62,13 @@ const AdminLayout = () => {
             Stores
           </NavLink>
 
-          <NavLink
-  to="/admin/change-password"
-  className={({ isActive }) =>
-    `block px-4 py-2 rounded-lg text-sm font-medium ${
-      isActive
-        ? "bg-indigo-100 text-indigo-700"
-        : "text-gray-600 hover:bg-gray-200"
-    }`
-  }
->
-  Change Password
-</NavLink>
+          {/* ✅ Change Password (Modal Trigger) */}
+          <button
+            onClick={() => setOpenModal(true)}
+            className="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-200"
+          >
+            Change Password
+          </button>
 
         </nav>
       </aside>
@@ -94,6 +96,16 @@ const AdminLayout = () => {
         </main>
 
       </div>
+
+      {/* ✅ Change Password Modal */}
+      <ChangePasswordModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        onSuccess={() => {
+          logout() // Auto logout after password change
+        }}
+      />
+
     </div>
   )
 }
