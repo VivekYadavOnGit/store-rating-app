@@ -84,6 +84,7 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess }) => {
                 <Input
                     label="Name"
                     value={form.name}
+                    placeholder="Name must be 20–60 characters"
                     error={errors.name}
                     onChange={(e) =>
                         setForm({ ...form, name: e.target.value })
@@ -93,6 +94,7 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess }) => {
                 <Input
                     label="Email"
                     value={form.email}
+                    placeholder="Enter a valid email format"
                     error={errors.email}
                     onChange={(e) =>
                         setForm({ ...form, email: e.target.value })
@@ -102,6 +104,7 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess }) => {
                 <Input
                     label="Password"
                     value={form.password}
+                    placeholder="Password must be 8–16 characters, include at least one uppercase letter and one special character"
                     error={errors.password}
                     onChange={(e) =>
                         setForm({ ...form, password: e.target.value })
@@ -111,6 +114,7 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess }) => {
                 <Input
                     label="Address"
                     value={form.address}
+                    placeholder="Address must be under 400 characters"
                     error={errors.address}
                     onChange={(e) =>
                         setForm({ ...form, address: e.target.value })
