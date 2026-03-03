@@ -1,9 +1,8 @@
 import axios from "axios"
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://ratehub-7dyk.onrender.com/api",
 })
-
 
 API.interceptors.request.use(
   (config) => {
