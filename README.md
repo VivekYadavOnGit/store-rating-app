@@ -164,7 +164,12 @@ Frontend runs on:
 ```
 http://localhost:5173
 ```
-
+Admin Credentials:
+Email Id & Password
+```
+admin@store.com
+Admin@123
+```
 ---
 
 # 🌍 Production Deployment
