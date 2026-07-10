@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const Input = ({ label, type = "text", ...props }) => {
+const Input = ({ label, type = "text", error, ...props }) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const isPassword = type === "password"
@@ -17,7 +17,7 @@ const Input = ({ label, type = "text", ...props }) => {
         <input
           type={isPassword && showPassword ? "text" : type}
           {...props}
-          className="w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${error ? 'border-red-500' : 'border-gray-300'}`}
         />
 
         {/* 👁 Eye Button */}
@@ -31,6 +31,10 @@ const Input = ({ label, type = "text", ...props }) => {
           </button>
         )}
       </div>
+
+      {error && (
+        <p className="text-sm text-red-600 mt-1">{error}</p>
+      )}
     </div>
   )
 }

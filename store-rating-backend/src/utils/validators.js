@@ -10,7 +10,7 @@ exports.validateEmail = (email) => {
   }
   
   exports.validateName = (name) => {
-    return name.length >= 20 && name.length <= 60
+    return Boolean(name && name.trim().length >= 10 && name.trim().length <= 20)
   }
   
   exports.validateAddress = (address) => {

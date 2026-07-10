@@ -20,8 +20,8 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess }) => {
     const validateForm = (form) => {
         const errors = {}
 
-        if (form.name.length < 20 || form.name.length > 60) {
-            errors.name = "Name must be 20–60 characters"
+        if (form.name.length < 10 || form.name.length > 20) {
+            errors.name = "Name must be 10–20 characters"
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -84,7 +84,7 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess }) => {
                 <Input
                     label="Name"
                     value={form.name}
-                    placeholder="Name must be 20–60 characters"
+                    placeholder="Name must be 10–20 characters"
                     error={errors.name}
                     onChange={(e) =>
                         setForm({ ...form, name: e.target.value })

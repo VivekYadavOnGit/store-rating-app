@@ -18,7 +18,7 @@ exports.register = async (req, res) => {
     // 🔹 Name validation
     if (!validateName(name)) {
       return res.status(400).json({
-        message: "Name must be between 20 and 60 characters"
+        message: "Name must be between 10 and 20 characters"
       })
     }
 
